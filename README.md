@@ -2,7 +2,7 @@
 
 # Go in Practice
 
-# Getting started with Go
+# 1. Getting started with Go
 <details>
 <summary>expand</summary>
 
