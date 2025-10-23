@@ -31,7 +31,39 @@ Goroutines are managed by the Go runtime, where they are mapped and moved to the
 **! check about event-drive and async/await approaches in other languages.** <br/>
 ![goroutines-threads distribution schema](../img/1.png)
 
+Channels provide a way for two goroutines to communicate with each pther or anohe process. By default, they block execution, allowing goroutines to synchronise. <br/>
+![channels inner working](../img/2.png)
+Channels can be one-directional or bidirectional, controlled by syntax that indicates the data direction: <- or ->.
 
+Here is a simple example of chnnel usage:
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func printCount(c chan int) {
+    num := 0
+    for num >= 0 {
+        num = <-c
+        fmt.print(num, " ")
+    }
+}
+
+func main() {
+    c:= make(chan int)
+    a := []int{8, 6, 7, 5, 3, 0, 9, -1}
+    go printCount(c)
+    for _, v := range a {
+        c <- v
+    }
+    time.Sleep(time.Millisecond * 1)
+    fmt.Println("End of main")
+}
+```
+Here we iterate through an array and send all o its values to a channel, and the chanel is being listened by a goroutine started previously. The goroutine executes a function that prints values from a channel until the first negative value appears. 
 ## 2.4 Go toolchain
 
 # 3. Go in the vast language landscape
