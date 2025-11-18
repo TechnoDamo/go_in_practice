@@ -12,3 +12,5 @@
 - Getting up and running in go
 - Hello, Go
 </details>
+
+# 2. Building a CLI application
