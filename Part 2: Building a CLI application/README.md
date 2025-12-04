@@ -50,7 +50,48 @@ Common useful flag package methods:
 - **PrintDefaults()** - Show flag for help.
 - **Args()** - Get positional arguments (all after flags)
 ## Defining valid values via enums
+```go
+package main
+
+import (
+    "flag"
+    "log"
+)
+
+var name = flag.String("name", "World", "name to say hello to.")
+
+type language = string // defining a type alias to a string
+
+var userLanguage language // destination value
+
+// enumeration of constants
+const (
+    English language "en"
+    Spanish = "sp"
+    French = "fr"
+    German = "de"
+)
+
+func init() {
+    flag.StringVar(&userLanguage, "lang", "eng", "lang to use") // assigning value to a var with a flag
+    flag.Parse()
+}
+
+func main() {
+    switch(userLanguage) { // switching around defined values
+    case English:
+        log.Printf("Hello %s\n", *name)
+    case Spanish:
+        log.Printf("Hola %s\n", *name)
+    case French:
+        log.Printf("Bonjour %s!\n", *name)
+    case German:
+        log.Printf("Hallo %s!\n", *name)
+    }
+}
+```
 ## Slices, arrays and maps
+
 ## Command-line frameworks
 # Handling configuration
 # Working with the real-world web servers
